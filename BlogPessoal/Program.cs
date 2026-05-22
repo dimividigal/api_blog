@@ -1,3 +1,5 @@
+using BlogPessoal.Repositories;
+using BlogPessoal.Services;
 using BlogPessoal.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
@@ -34,6 +36,16 @@ builder.Services.AddOpenApi();
 // CORS
 builder.Services.AddCors(options =>
     options.AddPolicy("AllowAll", p => p.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()));
+
+// Repositories
+builder.Services.AddScoped<ITemaRepository, TemaRepository>();
+builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+builder.Services.AddScoped<IPostagemRepository, PostagemRepository>();
+
+// Services
+builder.Services.AddScoped<TemaService>();
+builder.Services.AddScoped<UsuarioService>();
+builder.Services.AddScoped<PostagemService>();
 
 var app = builder.Build();
 
